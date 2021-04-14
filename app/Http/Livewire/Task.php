@@ -2,28 +2,35 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Task as ModelsTask;
 use Livewire\Component;
 
 class Task extends Component
 {
-    public $name        =   "Abdi";
-    public $greeting    =   "hi";
+   public $tasks;
 
 
-    public function mount($greeting)
+
+    public function mount()
     {
-        $this->geetting = $greeting;
+        $this->tasks = ModelsTask::all();
     }
 
-    public function updatedName()
+    public function deleteTask($task)
     {
-        $this->greeting = strtoupper($this->greeting);
+        ModelsTask::findOrFail($task)->delete();
+        $this->tasks = ModelsTask::all();
+    }
+    
+    public function markAsCompleted($task)
+    {
+        ModelsTask::findOrFail($task)->update([
+            "isCompleted" => 1
+        ]);
+
+        $this->tasks = ModelsTask::all();
     }
 
-    public function resetName(){
-
-       $this->name = "Abdifatah";
-    }
 
     public function render()
     {

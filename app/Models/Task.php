@@ -10,4 +10,14 @@ class Task extends Model
     use HasFactory;
 
     protected $fillable = ["name", "isCompleted"];
+
+
+    public function complete()
+    {
+        $this->task->isCompleted = 1;
+    }
+    public function unComplete()
+    {
+        $this->task->isCompleted = 0;
+    }
 }

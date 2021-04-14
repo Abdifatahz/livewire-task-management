@@ -4,7 +4,7 @@
 @section("content")
 
 <div class="container">
-    @livewire("task",['greeting' => 'Hola'])
+    @livewire("task")
 </div>
 
 

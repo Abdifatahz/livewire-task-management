@@ -1,17 +1,22 @@
 <div>
 
-    <input wire:model.debounce="name" type="text">
+    <ul class="list-group">
 
-    <select wire:model="greeting">
-        <option>Hello</option>
-        <option>Again</option>
-        <option>And Again</option>
+        @foreach ($tasks as $task)
+        <li class="list-group-item">
 
-    </select>
+            <span wire:click="deleteTask('{{$task->id}}')" class="float-right ml-4  text-danger fa fa-trash"></span>
 
-    <span>{{$greeting}}  {{$name}}</span>
 
-    <button wire:click="resetName">Reset</button>
-    <button wire:click="$set('name','Hulk')">Reset Again</button>
+            @if(!$task->isCompleted)
+            {{$task->name}}
+            <span wire:click="markAsCompleted('{{$task->id}}')" class="float-right  text-success fa fa-check"></span>
+            @else
+            <del>{{$task->name}}</del>
+            @endif
+        </li>
+        @endforeach
+
+    </ul>
 
 </div>
