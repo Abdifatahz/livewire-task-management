@@ -14,10 +14,16 @@
             <del>{{$task->name}}</del>
             @endif
 
-            <span wire:click="incrementLove('{{$task->id}}')" class="float-left  mr-4  text-danger fa fa-heart"><b> {{$task->love}}</b></span>
+            <span wire:click="incrementLove('{{$task->id}}')" class="float-left  mr-4  text-danger fa {{$task->love > 0 ? 'fa-heart' : 'fa-heart-o'}}"><b> {{$task->love}}</b></span>
 
         </li>
         @endforeach
+        <hr>
+        <form wire:submit.prevent="addTask">
+            <input class="form-control" type="text" wire:model="name" placeholder="Enter a task name">
+            @error('name') <span class="text-danger">{{ $message }}</span> @enderror
+        </form>
+
 
     </ul>
 
