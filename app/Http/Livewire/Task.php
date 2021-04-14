@@ -30,6 +30,14 @@ class Task extends Component
 
         $this->tasks = ModelsTask::all();
     }
+    public function incrementLove($task)
+    {
+        $task = ModelsTask::findOrFail($task);
+        $task->love = $task->love + 1;
+        $task->save();   
+
+        $this->tasks = ModelsTask::all();
+    }
 
 
     public function render()

@@ -23,7 +23,8 @@ class TaskFactory extends Factory
     {
         return [
             'name'           => $this->faker->name,
-            'isCompleted'   => 1
+            'isCompleted'   => 0,
+            'love'          => $this->faker->randomDigit    
         ];
     }
 }
