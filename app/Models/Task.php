@@ -11,6 +11,15 @@ class Task extends Model
 
     protected $fillable = ["name", "isCompleted","love"];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function scopeOwner($query)
+    {
+        return $query->whereUserId(auth()->id());
+    }
 
     public function complete()
     {
