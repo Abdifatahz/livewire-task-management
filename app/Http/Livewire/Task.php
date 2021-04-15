@@ -8,6 +8,7 @@ use Livewire\Component;
 
 class Task extends Component
 {
+   public $user;
    public $tasks;
    public $name;
 
@@ -20,13 +21,13 @@ class Task extends Component
 
     public function mount()
     {
-        $this->tasks = ModelsTask::all();
+        $this->tasks = ModelsTask::owner()->get();
     }
 
     public function deleteTask($task)
     {
         ModelsTask::findOrFail($task)->delete();
-        $this->tasks = ModelsTask::all();
+        $this->tasks  = ModelsTask::owner()->get();
     }
     
     public function markAsCompleted($task)
@@ -35,16 +36,16 @@ class Task extends Component
             "isCompleted" => 1
         ]);
 
-        $this->tasks = ModelsTask::all();
+        $this->tasks =  ModelsTask::owner()->get();
     }
 
     public function incrementLove($task)
     {
         $task = ModelsTask::findOrFail($task);
-        $task->love = $task->love + 1;
+        $task->love     = $task->love + 1;
         $task->save();   
 
-        $this->tasks = ModelsTask::all();
+        $this->tasks =  ModelsTask::owner()->get();
     }
 
     public function addTask()
@@ -54,10 +55,11 @@ class Task extends Component
         $task = New ModelsTask;
         $task->name             = $this->name;
         $task->isCompleted      = 0;
-        $task->love             = 0; 
+        $task->love             = 0;
+        $task->user_id          = auth()->id();
         $task->save();
 
-        $this->tasks = ModelsTask::all();
+        $this->tasks            = ModelsTask::owner()->get();
     }
 
 
