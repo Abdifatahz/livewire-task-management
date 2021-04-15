@@ -4,8 +4,12 @@
 @section("content")
 
 <div class="container">
-    @livewire("task")
+    <div class="row">
+        <div class="col-sm-12 col-md-6 offset-md-3">
+            @livewire("task")
+        </div>
+    </div>
 </div>
 
 
-    @endsection
+@endsection
