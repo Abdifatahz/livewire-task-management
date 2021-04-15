@@ -60,6 +60,8 @@ class Task extends Component
         $task->save();
 
         $this->tasks            = ModelsTask::owner()->get();
+
+        $this->name             =   '';
     }
 
 
