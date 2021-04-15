@@ -23,7 +23,7 @@
     @livewireStyles
 </head>
 
-<body>
+<body style="background: #e9ecef;">
     <div id="app">
 
         <main class="py-4">
